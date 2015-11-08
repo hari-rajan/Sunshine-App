@@ -14,17 +14,30 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.URI;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 
-
 /**
- * Created by harirajan on 11/2/15.
+ * Created by harirajan on 11/8/15.
  */
 public class FetchWeatherTask extends AsyncTask<String, Void, String[]>
 {
     private static String LOG_TAG = FetchWeatherTask.class.getSimpleName();
+    private static ForecastFragment mParent;
+
+    public Void setParent(ForecastFragment parent)
+    {
+        mParent = parent;
+        return null;
+    }
+
+    @Override
+    protected void onPostExecute(String[] strings)
+    {
+        Log.v(LOG_TAG, "onPostExec()..." + strings);
+        mParent.setWeatherData(strings);
+        //super.onPostExecute(strings);
+    }
 
     @Override
     protected String[] doInBackground(String... params)
@@ -90,21 +103,21 @@ public class FetchWeatherTask extends AsyncTask<String, Void, String[]>
                 // Stream was empty.  No point in parsing.
                 return null;
             }
+
             forecastJsonStr = buffer.toString();
-            Log.v(LOG_TAG, forecastJsonStr);
+            Log.v(LOG_TAG, "Raw JSON..." + forecastJsonStr);
 
             try
             {
                 String[] weatherData = getWeatherDataFromJson (forecastJsonStr, numDays);
-                Log.v(LOG_TAG, weatherData[0]);
+                //Log.v(LOG_TAG, weatherData[0]);
+                return weatherData;
             }
             catch (JSONException e)
             {
                 Log.e(LOG_TAG, e.getMessage(),e );
                 e.printStackTrace();
             }
-
-
         }
         catch (IOException e)
         {
