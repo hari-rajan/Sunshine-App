@@ -127,10 +127,11 @@ public class ForecastFragment extends Fragment
         if (weatherArray != null)
         {
             mForecastAdapter.clear();
-            for (String weatherData : weatherArray)
+            mForecastAdapter.addAll(weatherArray);
+            /*for (String weatherData : weatherArray)
             {
-                mForecastAdapter.add(weatherData);
-            }
+                mForecastAdapter.addAll(weatherData);
+            }*/
         }
         return null;
     }
