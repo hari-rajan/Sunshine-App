@@ -68,7 +68,7 @@ public class ForecastFragment extends Fragment
         {
             FetchWeatherTask fetchWeatherTask = new FetchWeatherTask();
             fetchWeatherTask.setParent(this);
-            fetchWeatherTask.execute("95014");
+            fetchWeatherTask.execute("48170");
             return true;
         }
 
