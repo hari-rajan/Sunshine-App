@@ -1,5 +1,7 @@
 package com.example.android.sunshine.app;
 
+import android.location.Address;
+import android.location.Geocoder;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.text.format.Time;
@@ -16,6 +18,8 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.SimpleDateFormat;
+import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by harirajan on 11/8/15.
@@ -246,7 +250,6 @@ public class FetchWeatherTask extends AsyncTask<String, Void, String[]>
             Log.v(LOG_TAG, "Forecast entry: " + s);
         }
         return resultStrs;
-
     }
 
 }
